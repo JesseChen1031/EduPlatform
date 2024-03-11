@@ -1,0 +1,65 @@
+.file-explorer {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #f9f9f9;
+  }
+  
+  .file-explorer-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .file-explorer-controls {
+    margin-bottom: 20px;
+  }
+  
+  .folder-container {
+    display: block;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Style for individual folder */
+  .folder {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .folder:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+  }
+  
+  /* Style for folder icon */
+  .folder-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for folder name */
+  .folder-name {
+    font-weight: bold;
+  }
+  
+  /* Style for create folder button */
+  .file-explorer-controls button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-explorer-controls button:hover {
+    background-color: #0056b3;
+  }
+  
