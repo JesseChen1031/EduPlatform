@@ -1,0 +1,47 @@
+.folder {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .folder:hover {
+    background-color: #e3e3e3;
+  }
+  
+  .folder-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .folder-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  
+  .folder-name {
+    font-weight: bold;
+  }
+  
+  .folder-actions {
+    display: inline;
+    justify-content: space-between;
+  }
+
+  .folder-actions button {
+    padding: 5px 10px;
+    background-color: #f42222;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .folder-actions button:hover {
+    background-color: #f06464;
+  }
+  
