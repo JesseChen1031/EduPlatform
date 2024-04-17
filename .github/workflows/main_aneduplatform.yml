@@ -27,7 +27,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-          rm -rf node_modules
+          Remove-Item -Path node_modules -Recurse -Force
 
       - name: setup server
         run: |
