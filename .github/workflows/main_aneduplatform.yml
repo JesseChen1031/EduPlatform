@@ -21,10 +21,16 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: npm install, build, and test -- client
+        working-directory: client
         run: |
           npm install
           npm run build --if-present
+          npm run test --if-present
+
+      - name: server test
+        working-directory: server
+        run: |
           npm run test --if-present
       
       - name: Upload artifact for deployment job
