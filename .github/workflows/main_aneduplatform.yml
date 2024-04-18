@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -21,28 +21,17 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: setup client
-        working-directory: client
+      - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
-          rm -rf node_modules
-          
-      - name: setup server
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: release.zip
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,20 +47,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
       
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_58C57818C8904A3AB290013E7ABA9ADC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A48543F135D4446FBE9EA8CC8AE21122 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_011C0D0B6A6248E6BE65FD2BC7E73A12 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F1E426853C564086AC36D273A5B35F70 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_035C00A076134F83B5EF595A25668E1D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_ED82C1AF946B4E308E776194896C9497 }}
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
           app-name: 'AnEduPlatform'
           slot-name: 'Production'
