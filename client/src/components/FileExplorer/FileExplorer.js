@@ -23,7 +23,7 @@ const FileExplorer = () => {
     return (
         <div className="file-explorer">
         <div className="file-explorer-header">
-            <h2>文件资源管理器r</h2>
+            <h2>文件资源管理器</h2>
         </div>
         <div className="file-explorer-controls">
             <button onClick={handleCreateFolder}>新建文件夹</button>
