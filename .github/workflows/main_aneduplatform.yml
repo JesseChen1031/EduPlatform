@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -19,27 +19,22 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
-      - name: setup client
-        working-directory: client
+      - name: npm install, build, and test
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
-          Remove-Item -Path node_modules -Recurse -Force
 
-      - name: setup server
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-      
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -55,17 +50,20 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
       
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F72AC61675D743C88EB1539B61AB6A01 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_528FEACF53A24BB387D42E15B0CCA9FD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E6889E3BEDCC43D6BF51BAE4C203F74C }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_58C57818C8904A3AB290013E7ABA9ADC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A48543F135D4446FBE9EA8CC8AE21122 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_011C0D0B6A6248E6BE65FD2BC7E73A12 }}
 
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
         with:
           app-name: 'AnEduPlatform'
           slot-name: 'Production'
