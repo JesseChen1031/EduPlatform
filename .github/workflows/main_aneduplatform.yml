@@ -21,7 +21,15 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: setup client
+        working-directory: client
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+          Remove-Item -Path node_modules -Recurse -Force
+
+      - name: setup server
         run: |
           npm install
           npm run build --if-present
