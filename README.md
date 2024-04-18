@@ -1,1 +1,1 @@
-# EduPlatform
+# AnEduPlatform
