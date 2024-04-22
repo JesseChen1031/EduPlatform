@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/user/register", formData);
-      alert("Register success");
+      alert("Register success", response.message);
     } catch (error) {
       alert(error.message);
       console.error("Register failed:", error.response.data);
