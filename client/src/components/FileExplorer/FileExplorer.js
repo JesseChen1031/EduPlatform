@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FileExplorer.css';
-import Folder from '../Folder/Folder'
+import FolderItem from '../FolderItem/FolderItem'
 
 const FileExplorer = () => {
     const [folders, setFolders] = useState([]);
@@ -30,7 +30,7 @@ const FileExplorer = () => {
         </div>
         <div className="folder-container">
             {folders.map((folder, index) => (
-            <Folder
+            <FolderItem
                 key={index}
                 name={folder}
                 onRemoveFolder={handleDeleteFolder}
