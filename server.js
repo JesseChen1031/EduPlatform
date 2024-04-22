@@ -1,31 +1,44 @@
 import express from "express";
 import cors from "cors";
-import path, {dirname} from "path";
-import FileExplorerRouter from "./routes/FileExplorerRecords.js";
-import { fileURLToPath } from 'url';
+import path, { dirname } from "path";
+import UserRouter from "./routes/UserRouter.js";
+import { fileURLToPath } from "url";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
+dotenv.config(".");
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const PORT = process.env.PORT || 5050;
+const mongoURI = process.env.MONGODB_CONNECTION_STRING;
 const app = express();
-
 
 app.use(cors());
 app.use(express.json());
 
+// Connect to MongoDB
+mongoose.connect(mongoURI, {});
+
+// Event listeners for connection success and error
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB");
+});
+
+mongoose.connection.on("error", (error) => {
+  console.error("MongoDB connection error:", error);
+});
+
 //API Routers
-app.use("/FileExplorer", FileExplorerRouter);
+app.use("/api/user", UserRouter);
 
+app.set("port", PORT);
 
-app.set('port', PORT);
-
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("*", (req, res) => {
-  console.log(req)
-  res.sendFile(path.resolve(__dirname, "client", "build",     
-  "index.html"));
+  console.log(req);
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
 // catch 404 and forward to error handler
@@ -44,9 +57,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-
 // start the Express server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
