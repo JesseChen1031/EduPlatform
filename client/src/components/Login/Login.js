@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/user/login", formData);
-      alert("login success");
+      alert("login success", response.message);
     } catch (error) {
       alert(error.message);
       console.error("Login failed:", error.response.data);
