@@ -1,5 +1,5 @@
 import React from 'react';
-import './Folder.css';
+import './FolderItem.css';
 
 const Folder = ({ name, onRemoveFolder }) => {
 

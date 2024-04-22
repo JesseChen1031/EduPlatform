@@ -1,7 +1,9 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import dotenv from 'dotenv'
+dotenv.config('..')
 
-const uri = process.env.MongoDBUri 
-|| "mongodb+srv://testuser:testpassword@educluster.mgpwngt.mongodb.net/?retryWrites=true&w=majority&appName=EduCluster";
+const uri = process.env.MONGODB_CONNECTION_STRING
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -22,6 +24,4 @@ try {
   console.error(err);
 }
 
-let db = client.db("employees");
-
-export default db;
+export default client;
