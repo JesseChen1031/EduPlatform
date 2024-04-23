@@ -49,7 +49,7 @@ function App() {
           </li>
         </ul>
         <Routes>
-          <Route path="/Login" element={<Login setToken={setToken} />}></Route>
+          <Route path="/" element={<Login setToken={setToken} />}></Route>
           <Route path="/Register" element={<Register />}></Route>
           <Route
             path="/Home"
