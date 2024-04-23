@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -17,10 +17,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/user/login", formData);
-      alert("login success", response.message);
+      console.log(response.data);
+      alert("Login successful", response.data.message);
+      setToken(response.data.token);
     } catch (error) {
       alert(error.message);
-      console.error("Login failed:", error.response.data);
+      console.error("Login failed:", error);
     }
   };
 
