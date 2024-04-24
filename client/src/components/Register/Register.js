@@ -19,8 +19,8 @@ const Login = () => {
       const response = await axios.post("/api/user/register", formData);
       alert("Register successful", response.message);
     } catch (error) {
-      alert(error.message);
-      console.error("Register failed:", error.response.data);
+      alert("Register failed");
+      console.error(error.message, error.error);
     }
   };
 
