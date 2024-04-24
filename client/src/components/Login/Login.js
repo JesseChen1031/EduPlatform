@@ -21,7 +21,7 @@ const Login = ({ setToken }) => {
       alert("Login successful", response.data.message);
       setToken(response.data.token);
     } catch (error) {
-      alert("Login failed:");
+      alert("Login failed");
       console.error(error.message, error.error);
     }
   };
