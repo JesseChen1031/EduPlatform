@@ -27,6 +27,7 @@ function App() {
       await axios.post("/api/user/logout");
 
       setToken();
+      alert("Logout successful");
 
       <Navigate to="/Login" />;
     } catch (error) {
@@ -49,7 +50,7 @@ function App() {
           </li>
         </ul>
         <Routes>
-          <Route path="/" element={<Login setToken={setToken} />}></Route>
+          <Route path="/Login" element={<Login setToken={setToken} />}></Route>
           <Route path="/Register" element={<Register />}></Route>
           <Route
             path="/Home"
@@ -57,6 +58,7 @@ function App() {
               isAuthenticated() ? <FileExplorer /> : <Navigate to="/Login" />
             }
           />
+          <Route path="/" element={<Navigate to="/Login" />} />
         </Routes>
       </div>
     </Router>
