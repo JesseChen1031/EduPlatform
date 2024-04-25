@@ -1,10 +1,9 @@
-import React from 'react';
-import './FolderItem.css';
+import React from "react";
+import "./FolderItem.css";
 
-const Folder = ({ name, onRemoveFolder }) => {
-
+const FolderItem = ({ folderId, name, onRemoveFolder }) => {
   const handleRemoveFolder = () => {
-    onRemoveFolder(name);
+    onRemoveFolder(folderId);
   };
 
   return (
@@ -20,4 +19,4 @@ const Folder = ({ name, onRemoveFolder }) => {
   );
 };
 
-export default Folder;
+export default FolderItem;

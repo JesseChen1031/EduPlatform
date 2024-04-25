@@ -20,7 +20,7 @@ const Login = () => {
       alert("Register successful", response.message);
     } catch (error) {
       alert("Register failed");
-      console.error(error.message, error.error);
+      console.error(error);
     }
   };
 

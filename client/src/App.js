@@ -17,7 +17,8 @@ function App() {
 
   const isAuthenticated = () => {
     if (token) {
-      return true;
+      localStorage.setItem("token", token);
+      return localStorage.getItem("token");
     }
     return false;
   };
@@ -26,13 +27,13 @@ function App() {
     try {
       await axios.post("/api/user/logout");
 
-      setToken();
+      setToken(null);
       alert("Logout successful");
-
-      <Navigate to="/Login" />;
     } catch (error) {
       console.error("Logout failed:", error);
     }
+
+    <Navigate to="/Login" />;
   };
 
   return (
@@ -46,7 +47,7 @@ function App() {
             <NavLink to="/Login">Login</NavLink>
           </li>
           <li>
-            <NavLink onClick={handleLogout}>Logout</NavLink>
+            <NavLink onClick={handleLogout}> Logout</NavLink>
           </li>
         </ul>
         <Routes>

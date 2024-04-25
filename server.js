@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
 import path, { dirname } from "path";
-import UserRouter from "./routes/UserRouter.js";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
+//Routers
+import UserRouter from "./routes/UserRouter.js";
+import FileExplorerRouter from "./routes/FileExplorerRouter.js";
 
 dotenv.config(".");
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +34,7 @@ mongoose.connection.on("error", (error) => {
 
 //API Routers
 app.use("/api/user", UserRouter);
+app.use("/api/fileExplorer", FileExplorerRouter);
 
 app.set("port", PORT);
 
